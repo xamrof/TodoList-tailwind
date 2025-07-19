@@ -1,0 +1,7 @@
+/* Hace que el texto de la tarea no sea seleccionable ni muestre el cursor de texto */
+.task-text {
+  @apply select-none cursor-default;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
