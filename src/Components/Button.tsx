@@ -1,18 +1,23 @@
 import React from "react";
-
+import Icon from "./Icon";
 interface ButtonProps {
-  label: string;
   onClick: () => void;
+  label?: string;
   className?: string; // Permite clases personalizadas
-  icon?: React.ReactNode; // Optional icon prop
+  iconName?: "add" | "edit" | "delete" | "save";
+  iconProps?: string; // Optional icon prop
 }
 
-const Button: React.FC<ButtonProps> = ({ label, onClick, className = "" }) => {
+const Button: React.FC<ButtonProps> = ({
+  label,
+  onClick,
+  className = "",
+  iconName,
+  iconProps = "w-6 h-6 mr-2",
+}) => {
   return (
-    <button
-      onClick={onClick}
-      className={`p-2 flex items-center justify-center text-center bg-amber-950 text-white rounded-full hover:bg-amber-900 task-text ${className}`}
-    >
+    <button onClick={onClick} className={`${className}`}>
+      {iconName && <Icon name={iconName} className={iconProps} />}
       {label}
     </button>
   );

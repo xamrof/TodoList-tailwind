@@ -29,6 +29,10 @@ function App() {
     );
   };
 
+  const handleDeleteClick = (id: number) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
@@ -46,7 +50,11 @@ function App() {
       <div className="task-text p-10 bg-white rounded-2xl shadow-md">
         <div className="inline-flex items-center gap-4 mb-6">
           <SearchBar value={inputValue} onChange={handleSearchChange} />
-          <Button label="ADD" onClick={handleAddClick} />
+          <Button
+            iconName="add"
+            iconProps="w-10 h-10"
+            onClick={handleAddClick}
+          />
         </div>
         <div className="space-y-2">
           {tasks.map((task) => (
@@ -73,7 +81,7 @@ function App() {
                     autoFocus
                   />
                   <Button
-                    label="Save"
+                    iconName="save"
                     onClick={() => {
                       handleEditClick(task.id, editingText);
                       setEditingTaskId(null);
@@ -86,14 +94,17 @@ function App() {
               <div className="flex gap-2 ml-auto">
                 {editingTaskId !== task.id && (
                   <Button
-                    label="Edit"
+                    iconName="edit"
                     onClick={() => {
                       setEditingTaskId(task.id);
                       setEditingText(task.text);
                     }}
                   />
                 )}
-                <Button label="Delete" onClick={() => {}} />
+                <Button
+                  iconName="delete"
+                  onClick={() => handleDeleteClick(task.id)}
+                />
               </div>
             </div>
           ))}
