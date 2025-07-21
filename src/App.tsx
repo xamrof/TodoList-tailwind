@@ -3,6 +3,8 @@ import "./App.css";
 import SearchBar from "./Components/SearchBarx";
 import Button from "./Components/Button";
 import Task from "./Components/Task";
+import { Item } from "./Components/Combobox";
+import { SearchAutocomplete } from "./Components/searchAutocomplete";
 
 function App() {
   const [tasks, setTasks] = useState<
@@ -48,13 +50,20 @@ function App() {
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-100">
       <div className="task-text p-10 bg-white rounded-2xl shadow-md">
-        <div className="inline-flex items-center gap-4 mb-6">
+        <div className="inline-flex items-center gap-4 mb-2">
           <SearchBar value={inputValue} onChange={handleSearchChange} />
           <Button
             iconName="add"
             iconProps="w-10 h-10"
             onClick={handleAddClick}
           />
+        </div>
+        <div className="mb-6">
+          <SearchAutocomplete label="Search Tasks" allowsCustomValue>
+            {tasks.map((task) => (
+              <Item key={task.id}>{task.text}</Item>
+            ))}
+          </SearchAutocomplete>
         </div>
         <div className="space-y-2">
           {tasks.map((task) => (
